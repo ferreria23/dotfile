@@ -1,0 +1,125 @@
+set clipboard+=unnamedplus
+set shiftwidth=2
+
+if exists('g:vscode')
+else
+	call plug#begin()
+
+	Plug 'christoomey/vim-tmux-navigator'
+
+	" Themes
+	Plug 'arcticicestudio/nord-vim'
+	Plug 'drewtempelmeyer/palenight.vim'
+	Plug 'joshdick/onedark.vim'
+	Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+	Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+	Plug 'rebelot/kanagawa.nvim'
+	Plug 'EdenEast/nightfox.nvim'
+	Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+	Plug 'bluz71/vim-nightfly-guicolors'
+
+	Plug 'preservim/nerdtree',  { 'on':  'NERDTreeFind' }
+	Plug 'Xuyuanp/nerdtree-git-plugin'
+	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+	Plug 'junegunn/fzf.vim'  " General fuzzy finder
+	Plug 'f-person/git-blame.nvim'
+	Plug 'airblade/vim-gitgutter'
+	Plug 'tpope/vim-fugitive'
+	" Plug 'cohama/lexima.vim' removed due conflict with coc autocomplete
+	" on enter
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	Plug 'vim-airline/vim-airline'
+	Plug 'preservim/nerdcommenter'
+
+	" Syntax
+	"Plug 'pangloss/vim-javascript'
+	"Plug 'leafgarland/typescript-vim'
+	Plug 'maxmellon/vim-jsx-pretty'
+	Plug 'jparise/vim-graphql'
+	Plug 'sheerun/vim-polyglot'
+
+	call plug#end()
+
+	let mapleader=" "
+	set nocompatible
+
+	source $HOME/.config/nvim/plug-config/coc.vim
+	
+	:imap jk <Esc>
+
+	let g:NERDTreeChDirMode = 2  " Change cwd to parent node
+	let g:NERDTreeMinimalUI = 1  " Hide help text
+	let g:NERDTreeAutoDeleteBuffer = 1
+
+	" Exit Vim if NERDTree is the only window remaining in the only tab.
+	autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+	" Close the tab if NERDTree is the only window remaining in it.
+	autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+	" Prefix all commands with Fz,
+	" so Files is Fzfiles, Rg is FzRg, etc.
+	" It's useful to autocomplete all fzf commands using :Fz<tab>
+	let g:fzf_command_prefix = 'Fz'
+
+	" Keeps the history of previous searches.
+	" You can use ctrl-n or ctr-p to navigate the history on a FZF window
+	let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+
+	 "Show tabs
+	"let g:airline#extensions#tabline#enabled = 1
+	"let g:airline#extensions#tabline#buffer_nr_show = 1
+	"let g:airline#extensions#tabline#left_sep = ' '
+	"let g:airline#extensions#tabline#left_alt_sep = '|'
+	"let g:airline#extensions#tabline#formatter = 'jsformatter'
+
+	" Coc
+	let g:coc_global_extensions = ['coc-pairs', 'coc-tsserver', 'coc-eslint', 'coc-prettier', 'coc-json']
+
+	nnoremap <C-t> :NERDTreeToggle<CR>
+	nnoremap <c-F> :NERDTreeFind<CR>
+
+	" Split resize
+	nnoremap <Leader>> 10<C-w>>
+	nnoremap <Leader>< 10<C-w><
+	
+	nnoremap <Leader>w :w<CR>
+	nnoremap <Leader>q :q<CR>
+
+	" Close current buffer
+	:nnoremap <C-x> :bd<CR>
+
+	" Buffer list
+	nnoremap <Leader>b :FzBuffers<CR>
+
+	" Remove highlight search text
+	nnoremap <silent> <cr> :noh<CR><CR>
+
+	noremap <leader>p :FzFiles<CR>
+	noremap <leader>f :FzRg<CR>
+
+	nmap <C-_>   <Plug>NERDCommenterToggle
+	vmap <C-_>   <Plug>NERDCommenterToggle
+
+	set autoindent
+	set number
+	set relativenumber
+	"highlight CursorLine cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
+	set cursorline
+	"set cursorlineopt=number
+
+	" For nerdcommenter
+	filetype plugin on
+	" Use bat as preview for fzf.vim
+	command! -bang -nargs=? -complete=dir Files
+    	\ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
+
+	set termguicolors
+
+	let g:tokyonight_transparent = "true"
+	let g:tokyonight_style = "storm"
+	colorscheme tokyonight
+
+endif
