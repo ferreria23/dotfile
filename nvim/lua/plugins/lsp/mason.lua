@@ -24,11 +24,12 @@ mason_lspconfig.setup({
 		"html",
 		"cssls",
 		"dockerls",
-		"eslint",
 		"graphql",
 		"sumneko_lua",
 		"bashls",
 	},
+
+	automatic_installation = true,
 })
 
 mason_null_ls.setup({
@@ -37,4 +38,6 @@ mason_null_ls.setup({
 		"stylua",
 		"eslint_d",
 	},
+
+	automatic_installation = true,
 })

@@ -20,8 +20,11 @@ end
 return packer.startup(function(use)
 	use("wbthomason/packer.nvim")
 
+	use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
+
 	use("folke/tokyonight.nvim") -- theme
 	use("christoomey/vim-tmux-navigator")
+	use("szw/vim-maximizer") -- maximizes and restores current window
 	use("tpope/vim-surround")
 	use("numToStr/Comment.nvim")
 	use("nvim-tree/nvim-tree.lua")
@@ -54,6 +57,7 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
 	use({ "glepnir/lspsaga.nvim", branch = "main" }) -- enhanced lsp uis
 	use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
+	use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
 
 	-- formatting & linting
 	use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
