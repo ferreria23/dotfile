@@ -10,6 +10,8 @@ hyper - l : yabai -m window --focus east
 
 #minimize windows
 hyper - m : yabai -m window --minimize
+#deminimize
+hyper - n : yabai -m window --deminimize $(yabai -m query --windows | jq -re ".[] | select(.[\"is-minimized\"] == true).id" )
 
 ## Quickly restart the yabai launch agent
 ctrl + alt + cmd - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
