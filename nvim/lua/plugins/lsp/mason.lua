@@ -25,7 +25,8 @@ mason_lspconfig.setup({
 		"cssls",
 		"dockerls",
 		"graphql",
-		"sumneko_lua",
+		-- "sumneko_lua",
+		"lua_ls",
 		"bashls",
 	},
 

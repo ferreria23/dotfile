@@ -33,3 +33,6 @@ opt.clipboard:append("unnamedplus")
 -- split windows
 opt.splitright = true
 opt.splitbelow = true
+
+-- show file name in winbar
+opt.winbar = "%f %m"
